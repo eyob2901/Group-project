@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <stdarg.h>
+#include <unistd.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -14,8 +15,8 @@
  */
 typedef struct structprint
 {
-	char *q;
-	int (*u)(char *format, va_list);
+char *q;
+int (*u)(char *format, va_list);
 } structype;
 
 int _putchar(char c);
