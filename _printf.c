@@ -1,3 +1,5 @@
+#include<stdarg.h>
+#include<stdio.h>
 #include "main.h"
 
 /**
@@ -8,44 +10,36 @@
  */
 int _printf(const char *format, ...)
 {
-unsigned int i = 0, len = 0, ibuf = 0;
-va_list arguments;
-int (*function)(va_list, char *, unsigned int);
-char *buffer;
+int count = 0, i;
 
-va_start(arguments, format), buffer = malloc(sizeof(char) * 1024);
-if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
-return (-1);
-if (!format[i])
-return (0);
-for (i = 0; format && format[i]; i++)
+va_list data;
+
+va_start(data, format);
+
+for (i = 0; format[i] != '\0'; )
 {
-if (format[i] == '%')
+if (format[i] != '%')
 {
-if (format[i + 1] == '\0')
-{	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
-return (-1);
+count += count + _putchar(format[i]);
+i++;
 }
-else
-{	function = get_print_func(format, i + 1);
-if (function == NULL)
+else if (format[i] == '%' && format[i + 1] != ' ')
 {
-if (format[i + 1] == ' ' && !format[i + 2])
-return (-1);
-handl_buf(buffer, format[i], ibuf), len++, i--;
-}
-else
+switch (format[i + 1])
 {
-len += function(arguments, buffer, ibuf);
-i += ev_print_func(format, i + 1);
+case 'c':
+count += _putchar(va_arg(data, int));
+break;
+case 's':
+count += print_string(va_arg(data, char*));
+break;
+case '%':
+count += _putchar('%');
+break;
+default:
+break;
 }
-} i++;
+i += 2;
 }
-else
-handl_buf(buffer, format[i], ibuf), len++;
-for (ibuf = len; ibuf > 1024; ibuf -= 1024)
-;
-}
-print_buf(buffer, ibuf), free(buffer), va_end(arguments);
-return (len);
+return (count);
 }
