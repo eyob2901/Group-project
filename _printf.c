@@ -3,10 +3,9 @@
 #include "main.h"
 
 /**
- * _printf - formatted output conversion and print data.
- * @format: input string.
- *
- * Return: number of chars printed.
+ * _printf -> prints a given
+ * @format: parametr
+ * Return: return number of characters
  */
 int _printf(const char *format, ...)
 {
@@ -31,7 +30,7 @@ case 'c':
 count += _putchar(va_arg(data, int));
 break;
 case 's':
-count += print_string(va_arg(data, char*));
+count += print_string(va_arg(data, char *));
 break;
 case '%':
 count += _putchar('%');
@@ -41,5 +40,7 @@ break;
 }
 i += 2;
 }
+
 return (count);
+}
 }
