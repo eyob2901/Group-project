@@ -20,7 +20,7 @@ typedef struct structprint
 int _putchar(char c);
 int _puts(char *string);
 int printc(char *format, va_list);
-int printstr(char *format, va_list);
+int print_string(char *string);
 int _printf(char *format, ...);
 int printint(char *format, va_list pa);
 int integer(int number);
